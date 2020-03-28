@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     {% endblock %}
 </head>
 
@@ -29,12 +30,25 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <a href="{{ path('logout') }}">Logout</a>
+            <a href="{{ path('create_user') }}">Create account</a>
         </ul>
     </div>
 </nav>
 
-{% block body %}{% endblock %}
+<form class="form-signin" method="post">
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">
+        Sign in
+    </button>
+</form>
 
 
 {% block javascripts %}
@@ -47,3 +61,4 @@
 {% endblock %}
 </body>
 </html>
+
